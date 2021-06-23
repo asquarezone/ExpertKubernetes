@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nopCommerce
+spec:
+  containers:
+    - image: shaikkhajaibrahim/nopcommerce:4.4.3
+      ports:
+        - protocol: TCP
+          containerPort: 80
