@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: high-priority-pod
+spec:
+  containers:
+    - name: high-priority
+      image: shaikkhajaibrahim/nopcommerce:4.4.3
+      resources:
+        requests:
+          memory: "350Mi"
+          cpu: "350m"
+        limits:
+          memory: "1Gi"
+          cpu: "500m"
+  priorityClassName: "high"
