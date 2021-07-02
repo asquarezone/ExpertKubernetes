@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodeselector-demo
+spec:
+  containers:
+    - name: nodeselector-container
+      image: nginx
+      ports:
+        - containerPort: 80
+      livenessProbe:
+        httpGet: 
+          port: 80
+          path: /
+        initialDelaySeconds: 30
+  nodeSelector:
+    disktype: ssd
+    os: ubuntu    
