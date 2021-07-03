@@ -1,0 +1,18 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjobdemo
+spec:
+  schedule: "0 0 * * 0,6"
+  jobTemplate:
+    spec:
+      template:
+        metadata: 
+          name: cronjobdemo-pod
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - image: alpine
+              name: cronjobdemo-c
+              command: ["sleep", "1h"]
