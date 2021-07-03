@@ -1,0 +1,17 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jobdemo
+spec:
+  completions: 6
+  parallelism: 2
+  template:
+    metadata: 
+      name: jobdemo-pod
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - image: alpine
+          name: jobdemo-c
+          command: ["sleep", "1h"]
