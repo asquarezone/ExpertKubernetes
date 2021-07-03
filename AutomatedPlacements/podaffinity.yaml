@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podaffinity-demo
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app: nop
+          topologyKey: kubernetes.io/hostname
+  containers:
+    - name: podaffinity-container
+      image: nginx
+      ports:
+        - containerPort: 80
+      livenessProbe:
+        httpGet: 
+          port: 80
+          path: /
+        initialDelaySeconds: 30
+    
