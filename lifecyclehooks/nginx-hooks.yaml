@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hooks-demo
+spec:
+  containers:
+    - name: hooks-container
+      image: nginx
+      ports:
+        - containerPort: 80
+      livenessProbe:
+        httpGet: 
+          port: 80
+          path: /
+        initialDelaySeconds: 30
+      lifecycle:
+        preStop:
+          httpGet:
+            port: 80
+            path: /shutdown
+        
