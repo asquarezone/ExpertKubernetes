@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-app
+spec:
+  containers:
+    - name: app
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - mountPath: /var/www/html
+          name: git
+    - name: polling
+      image: alpinegit
+      volumeMounts:
+        - mountPath: /var/www/html
+          name: git
+      env:
+        - name: GIT_REPO
+          value: https://github.com/qt/frontend.git
+      command:
+        - "sh"
+        - "-c"
+        - "git clone $(GIT_REPO) . && watch -n 600 git pull"
+  volumes:
+    - emptyDir: {}
+      name: git
