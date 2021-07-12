@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: initcontainer
+  labels:
+    app: ngnix
+spec:
+  initContainers:
+    - name: download
+      image: alpine
+      command:
+        - git
+        - clone
+        - https://github.com/qt/frontend.git
+        - /var/www/html
+      volumeMounts:
+        - mountPath: /var/www/html
+          name: source
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - mountPath: /var/www/html
+          name: source
+  volumes:
+    - emptyDir: {}
+      name: source
