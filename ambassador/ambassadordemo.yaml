@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  app: web-app
+  labels:
+    app: web
+    env: prod
+spec:
+  containers:
+    - image: nginx
+      name: main
+      env:
+        - name: CACHE_URL
+          value: http://localhost:9009
+      ports:
+        - containerPort: 80
+          protocol: TCP
+    - name: ambassador
+      image: qt/etcd-ambassdor
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  app: web-app
+  labels:
+    app: web
+spec:
+  containers:
+    - image: nginx
+      name: main
+      env:
+        - name: CACHE_URL
+          value: http://localhost:9009
+      ports:
+        - containerPort: 80
+          protocol: TCP
+    - name: ambassador
+      image: qt/mem-ambassdor
+      
