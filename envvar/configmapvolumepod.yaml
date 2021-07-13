@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-second-app
+spec:
+  containers:
+    - image: nginx
+      name: second
+      volumeMounts:
+        - name: config-volume
+          mountPath: /config
+  volumes:
+    - name: config-volume
+      configMap:
+        name: sample-config-map
+      
+
+              
