@@ -1,0 +1,27 @@
+# Default values for inventory.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+pod:
+  name: "experiment-1"
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "1.14"
+
+container:
+  port: 80
+  protocol: TCP
+  name: http
+
+label:
+  name: app
+  value: nginx
+
+replicaCount: 3
+
+service:
+  type: LoadBalancer
+  port: 80

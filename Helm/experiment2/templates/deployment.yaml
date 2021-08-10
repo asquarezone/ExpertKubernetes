@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Unique key of the Deployment instance
+  name: {{ .Chart.Name }}
+spec:
+  # 3 Pods should exist at all times.
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{ .Values.label.name }}: {{ .Values.label.value }}
+  template:
+    metadata:
+      labels:
+        # Apply this label to pods and default
+        # the Deployment label selector to this value
+        {{ .Values.label.name }}: {{ .Values.label.value }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        # Run this image
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        ports:
+          - name: {{ .Values.container.name }}
+            containerPort: {{ .Values.container.port }}
+            protocol: {{ .Values.container.protocol }}

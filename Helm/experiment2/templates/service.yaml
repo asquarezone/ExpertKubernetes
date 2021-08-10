@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  # Unique key of the Service instance
+  name: {{ .Chart.Name}}-svc
+spec:
+  ports:
+    # Accept traffic sent to port 80
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.container.port }}
+  selector:
+    {{ .Values.label.name }}: {{ .Values.label.value }}
+  type: {{ .Values.service.type }}
