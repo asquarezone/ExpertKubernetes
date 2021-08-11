@@ -21,6 +21,8 @@ spec:
         # Run this image
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         ports:
-          - name: {{ .Values.container.name }}
-            containerPort: {{ .Values.container.port }}
-            protocol: {{ .Values.container.protocol }}
+          {{- with .Values.container }}
+          - name: {{ .name }}
+            containerPort: {{ .port }}
+            protocol: {{ .protocol }}
+          {{- end }}
