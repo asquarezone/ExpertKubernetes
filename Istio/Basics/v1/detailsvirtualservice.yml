@@ -11,6 +11,6 @@ spec:
         - destination:
             host: details
       retries:
-        attempts: 100
+        attempts: 5
         perTryTimeout: 2s
         retryOn: 5xx
