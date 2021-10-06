@@ -10,3 +10,23 @@ spec:
     - route:
         - destination:
             host: reviews
+            subset: v1
+          weight: 90
+        - destination:
+            host: reviews
+            subset: v2
+          weight: 10
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reviews-destination
+spec:
+  host: reviews
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
