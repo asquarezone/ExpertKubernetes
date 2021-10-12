@@ -28,6 +28,6 @@ spec:
     trafficPolicy:
       outlierDetection:
         consecutiveErrors: 2
-        inteval: 1m
+        interval: 1m
         baseEjectionTime: 5m
         maxEjectionPercent: 100
