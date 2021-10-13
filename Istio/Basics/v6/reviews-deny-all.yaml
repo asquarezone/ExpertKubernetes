@@ -8,3 +8,10 @@ spec:
   selector:
     matchLabels:
       app: reviews
+  rules:
+    - from:
+        - source:
+            principals: ["cluster.local/ns/default/sa/bookinfo-productpage"]
+      to:
+        - operation:
+            methods: ["GET"]
